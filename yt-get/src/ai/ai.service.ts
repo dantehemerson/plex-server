@@ -24,7 +24,9 @@ export class AiService {
         Return the complete title in the same language it was provided in.
         
         Q: Escuela de vagabundos - película completa de Pedro Infante
-        A: Escuela de vagabundos (1955)`,
+        A: Escuela de vagabundos (1955)
+        
+        Respond using the provided format and do not add any additional information.`,
       },
       {
         role: 'user',
