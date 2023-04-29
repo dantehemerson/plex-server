@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { ChatCompletionRequestMessage } from 'openai';
+import { GetMovieTitleDto } from './dto/get-movie-title.dto';
+import { extractMovieTitle } from './helpers/extract-movie-title.helper';
 import { InjectChatGPTService } from './providers/chatgpt/chatgpt.provider';
 import { ChatGPTService } from './providers/chatgpt/chatgpt.service';
-import { GetMovieTitleDto } from './dto/get-movie-title.dto';
-import { ChatCompletionRequestMessage } from 'openai';
 
 @Injectable()
 export class AiService {
@@ -37,6 +38,13 @@ export class AiService {
 
     const data = response.data;
 
-    return data;
+    const messageContent = data?.choices?.[0]?.message?.content;
+
+    const movieTitle = extractMovieTitle(messageContent);
+
+    return {
+      title: movieTitle,
+      messageContent,
+    };
   }
 }
