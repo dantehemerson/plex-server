@@ -1,5 +1,21 @@
 version: "2.1"
+
 services:
+  samba:
+    image: dperson/samba # no tags, only latest
+    restart: always
+    command: '-u "ubuntu_msi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ=America/Lima
+    ports:
+      - 139:139
+      - 445:445
+    volumes:
+      - ${MEDIA}:/media
+      - ${STORAGE}/torrents:/downloads
+
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
