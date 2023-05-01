@@ -24,7 +24,7 @@ export class DownloaderConsumer {
       await youtubeDl(job.data.videoId, {
         noCheckCertificates: true,
         noWarnings: true,
-        // format: 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        format: 'bestvideo+bestaudio',
         addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
         output: `./videos/${job.data.videoTitle}.%(ext)s`,
       });
