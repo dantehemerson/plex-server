@@ -20,19 +20,19 @@ export class PopulatorService {
   @Cron(CronExpression.EVERY_10_SECONDS)
   async populateYoutubeVideos() {
     try {
-      console.log('\n\nPopulate youtube videos from playlist', {
+      this.logger.log('\n\nPopulate youtube videos from playlist', {
         playlist: process.env.YOUTUBE__PLAYLIST_ID,
         beforeQueueCounts: await this.youtubeQueue.getJobCounts(),
       });
 
       if (!(await this.needsToPopulate())) {
-        console.log(
+        this.logger.log(
           'There are waiting jobs in the queue, skipping population...',
         );
         return;
       }
 
-      console.info('Populating youtube videos from playlist...');
+      this.logger.log('Populating youtube videos from playlist...');
       const videos = await this.youtubeService.getVideosFromPlaylist();
 
       if (videos.length === 0) {
@@ -45,13 +45,13 @@ export class PopulatorService {
         );
 
         if (existsVideoInQueue) {
-          console.info(
+          this.logger.log(
             `Video ${video.contentDetails.videoId} already exists in queue, skipping...`,
           );
           break;
         }
 
-        console.info('Adding video to queue...', {
+        this.logger.log('Adding video to queue...', {
           videoId: video.contentDetails.videoId,
         });
 
@@ -68,13 +68,13 @@ export class PopulatorService {
           },
         );
 
-        console.info('Video added to queue successfully!', {
+        this.logger.log('Video added to queue successfully!', {
           videoId: video.contentDetails.videoId,
           jobId: job.id,
         });
       }
     } catch (error) {
-      console.log(error);
+      this.logger.log(error);
     } finally {
       console.log('\n\n');
     }
