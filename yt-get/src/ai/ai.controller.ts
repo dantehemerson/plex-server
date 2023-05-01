@@ -8,6 +8,6 @@ export class AiController {
 
   @Get('movie-title')
   async movieTitle(@Query() params: GetMovieTitleDto) {
-    return this.aiService.movieTitle(params);
+    return this.aiService.getMovieTitle(params);
   }
 }
