@@ -7,8 +7,6 @@ export class HealthController {
     return {
       ok: true,
       serverTime: new Date(),
-      OPENAI__API_KEY: process.env.OPENAI_API_KEY,
-      YOUTUBE__API_KEY: process.env.YOUTUBE_API_KEY,
       OPENAI_API_KEY: process.env.OPENAI_API_KEY,
       YOUTUBE__PLAYLIST_ID: process.env.YOUTUBE__PLAYLIST_ID,
       AUTH__PROVIDERS__GOOGLE__CLIENT_ID:
