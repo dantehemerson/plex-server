@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - redis
-    command: npm start
+    command: npm run start:prod
     environment:
       - REDIS__HOST=localhost
       - REDIS__PORT=6420
