@@ -5,11 +5,26 @@ services:
     build:
       context: ./yt-get
       dockerfile: Dockerfile
-    volumes:
-      - ./yt-get:/usr/src/app
-    command: npm run start:dev
+    depends_on:
+      - redis
+    command: npm start
+    environment:
+      - REDIS__HOST=localhost
+      - REDIS__PORT=6420
+      - PORT=3820
     ports:
-      - 3000:3000
+      - 3820:3820
+
+  redis: # To be used in plex-api by bull queue
+    image: redis
+    ports:
+      - '6420:6379'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+    restart: always
+    volumes:
+      - cache:/data
 
   # samba:
   #   image: dperson/samba # no tags, only latest
@@ -42,3 +57,5 @@ services:
   #     - ${STORAGE}/tmp:/tmp
   #   restart: unless-stopped
 
+volumes:
+  cache:
