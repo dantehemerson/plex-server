@@ -19,6 +19,7 @@ console.log('variables', {
   STORAGE: process.env.STORAGE,
   MEDIA_FOLDER: process.env.MEDIA_FOLDER,
   STORAGE_FOLDER: process.env.STORAGE_FOLDER,
+  PORT: process.env.PORT,
 });
 
 async function bootstrap() {

@@ -8,6 +8,8 @@ services:
     depends_on:
       - redis
     command: npm run start:prod
+    env_file:
+      - .env
     environment:
       - REDIS__HOST=localhost
       - REDIS__PORT=6420
