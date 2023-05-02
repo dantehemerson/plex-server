@@ -14,18 +14,6 @@ import { YoutubeModule } from './youtube/youtube.module';
   imports: [
     BullModule.forRootAsync({
       useFactory: async () => {
-        // if (process.env.REDIS__HOST && process.env.REDIS__PORT) {
-        //   console.log('👩‍🚒 Using configured redis database');
-        //   return {
-        //     redis: {
-        //       host: process.env.REDIS__HOST,
-        //       port: parseInt(process.env.REDIS__PORT),
-        //     },
-        //   };
-        // }
-
-        console.warn('Redis not configured, using in-memory redis database');
-
         const redisServer = new RedisMemoryServer();
 
         return {
