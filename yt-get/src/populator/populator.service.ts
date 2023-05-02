@@ -17,7 +17,7 @@ export class PopulatorService {
     private readonly aiService: AiService,
   ) {}
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
+  @Cron(CronExpression.EVERY_5_MINUTES)
   async populateYoutubeVideos() {
     try {
       this.logger.log('\n\nPopulate youtube videos from playlist', {
