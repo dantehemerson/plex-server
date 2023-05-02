@@ -11,22 +11,9 @@ services:
     env_file:
       - .env
     environment:
-      - REDIS__HOST=localhost
-      - REDIS__PORT=6420
       - PORT=3820
     ports:
       - 3820:3820
-
-  redis: # To be used in plex-api by bull queue
-    image: redis:6.2-alpine
-    ports:
-      - '6420:6379'
-    environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
-    restart: always
-    volumes:
-      - cache:/data
 
   # samba:
   #   image: dperson/samba # no tags, only latest
@@ -40,8 +27,8 @@ services:
   #     - 139:139
   #     - 445:445
   #   volumes:
-  #     - ${MEDIA}:/media
-  #     - ${STORAGE}/torrents:/downloads
+  #     - ${MEDIA_FOLDER}:/media
+  #     - ${STORAGE_FOLDER}/torrents:/downloads
 
   # plex:
   #   image: lscr.io/linuxserver/plex:latest
@@ -58,6 +45,3 @@ services:
   #     - ${STORAGE}/config:/config
   #     - ${STORAGE}/tmp:/tmp
   #   restart: unless-stopped
-
-volumes:
-  cache:
