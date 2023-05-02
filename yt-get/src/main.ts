@@ -3,6 +3,24 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
+console.log('variables', {
+  NODE_ENV: process.env.NODE_ENV,
+  REDIS__HOST: process.env.REDIS__HOST,
+  REDIS__PORT: process.env.REDIS__PORT,
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  YOUTUBE__PLAYLIST_ID: process.env.YOUTUBE__PLAYLIST_ID,
+  AUTH__PROVIDERS__GOOGLE__CLIENT_ID:
+    process.env.AUTH__PROVIDERS__GOOGLE__CLIENT_ID,
+  AUTH__PROVIDERS__GOOGLE__CLIENT_SECRET:
+    process.env.AUTH__PROVIDERS__GOOGLE__CLIENT_SECRET,
+  AUTH__PROVIDERS__GOOGLE__REFRESH_TOKEN:
+    process.env.AUTH__PROVIDERS__GOOGLE__REFRESH_TOKEN,
+  MEDIA: process.env.MEDIA,
+  STORAGE: process.env.STORAGE,
+  MEDIA_FOLDER: process.env.MEDIA_FOLDER,
+  STORAGE_FOLDER: process.env.STORAGE_FOLDER,
+});
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
