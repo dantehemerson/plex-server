@@ -1,34 +1,42 @@
 version: "2.1"
 
 services:
-  samba:
-    image: dperson/samba # no tags, only latest
-    restart: always
-    command: '-u "ubuntu_msi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
-    stdin_open: true
-    tty: true
-    environment:
-      - TZ=America/Lima
-    ports:
-      - 139:139
-      - 445:445
+  plex-api:
+    build:
+      context: ./yt-get
+      dockerfile: Dockerfile
     volumes:
-      - ${MEDIA}:/media
-      - ${STORAGE}/torrents:/downloads
+      - ./yt-get:/app
+    command: sh -c 'echo "Starting container...$STORAGE_FOLDER"; ls -l app'
 
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Lima
-      - VERSION=docker
-      - PLEX_CLAIM=claim-2rPx9CMGJ9dF2mxs-sv7
-    volumes:
-      - ${MEDIA}:/media
-      - ${STORAGE}/config:/config
-      - ${STORAGE}/tmp:/tmp
-    restart: unless-stopped
+  # samba:
+  #   image: dperson/samba # no tags, only latest
+  #   restart: always
+  #   command: '-u "ubuntu_msi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
+  #   stdin_open: true
+  #   tty: true
+  #   environment:
+  #     - TZ=America/Lima
+  #   ports:
+  #     - 139:139
+  #     - 445:445
+  #   volumes:
+  #     - ${MEDIA}:/media
+  #     - ${STORAGE}/torrents:/downloads
+
+  # plex:
+  #   image: lscr.io/linuxserver/plex:latest
+  #   container_name: plex
+  #   network_mode: host
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=America/Lima
+  #     - VERSION=docker
+  #     - PLEX_CLAIM=claim-2rPx9CMGJ9dF2mxs-sv7
+  #   volumes:
+  #     - ${MEDIA}:/media
+  #     - ${STORAGE}/config:/config
+  #     - ${STORAGE}/tmp:/tmp
+  #   restart: unless-stopped
 
