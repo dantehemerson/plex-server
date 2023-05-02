@@ -51,8 +51,8 @@ export class DownloaderConsumer {
         format: 'bestvideo+bestaudio',
         addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
         output: path.join(
-          process.env.STORAGE_FOLDER,
-          `yt-downloads`,
+          process.env.MEDIA_FOLDER,
+          'tmp_downloads',
           `${job.data.videoTitle}.%(ext)s`,
         ),
       });

@@ -16,7 +16,6 @@ export class HealthController {
       AUTH__PROVIDERS__GOOGLE__REFRESH_TOKEN:
         process.env.AUTH__PROVIDERS__GOOGLE__REFRESH_TOKEN,
       MEDIA_FOLDER: process.env.MEDIA_FOLDER,
-      STORAGE_FOLDER: process.env.STORAGE_FOLDER,
       PORT: process.env.PORT,
     };
   }

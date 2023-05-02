@@ -9,9 +9,9 @@ services:
     env_file:
       - .env
     environment:
+      - NODE_ENV=production
       - PORT=3820
       - MEDIA_FOLDER=/media
-      - STORAGE_FOLDER=/media/tmp_downloads
     ports:
       - 3820:3820
     volumes:
