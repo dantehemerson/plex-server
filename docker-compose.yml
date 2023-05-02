@@ -6,8 +6,10 @@ services:
       context: ./yt-get
       dockerfile: Dockerfile
     volumes:
-      - ./yt-get:/app
-    command: sh -c 'echo "Starting container...$STORAGE_FOLDER"; ls -l app'
+      - ./yt-get:/usr/src/app
+    command: npm run start:dev
+    ports:
+      - 3000:3000
 
   # samba:
   #   image: dperson/samba # no tags, only latest
