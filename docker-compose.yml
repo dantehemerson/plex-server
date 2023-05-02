@@ -1,45 +1,45 @@
 version: "2.1"
 
 services:
-  plex-api:
-    build:
-      context: ./yt-get
-      dockerfile: Dockerfile
-    command: npm run start:prod
-    env_file:
-      - .env
-    environment:
-      - PORT=3820
-    ports:
-      - 3820:3820
-
-  # samba:
-  #   image: dperson/samba # no tags, only latest
-  #   restart: always
-  #   command: '-u "ubuntu_msi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
-  #   stdin_open: true
-  #   tty: true
+  # plex-api:
+  #   build:
+  #     context: ./yt-get
+  #     dockerfile: Dockerfile
+  #   command: npm run start:prod
+  #   env_file:
+  #     - .env
   #   environment:
-  #     - TZ=America/Lima
+  #     - PORT=3820
   #   ports:
-  #     - 139:139
-  #     - 445:445
-  #   volumes:
-  #     - ${MEDIA_FOLDER}:/media
-  #     - ${STORAGE_FOLDER}/torrents:/downloads
+  #     - 3820:3820
 
-  # plex:
-  #   image: lscr.io/linuxserver/plex:latest
-  #   container_name: plex
-  #   network_mode: host
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=America/Lima
-  #     - VERSION=docker
-  #     - PLEX_CLAIM=claim-2rPx9CMGJ9dF2mxs-sv7
-  #   volumes:
-  #     - ${MEDIA}:/media
-  #     - ${STORAGE}/config:/config
-  #     - ${STORAGE}/tmp:/tmp
-  #   restart: unless-stopped
+  samba:
+    image: dperson/samba # no tags, only latest
+    restart: always
+    command: '-u "ubuntu_msi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
+    stdin_open: true
+    tty: true
+    environment:
+      - TZ=America/Lima
+    ports:
+      - 139:139
+      - 445:445
+    volumes:
+      - ${MEDIA_FOLDER}:/media
+      - ${STORAGE_FOLDER}/torrents:/downloads
+
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Lima
+      - VERSION=docker
+      - PLEX_CLAIM=claim-2rPx9CMGJ9dF2mxs-sv7
+    volumes:
+      - ${MEDIA_FOLDER}:/media
+      - ${STORAGE_FOLDER}/config:/config
+      - ${STORAGE_FOLDER}/tmp:/tmp
+    restart: unless-stopped
