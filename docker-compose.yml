@@ -16,7 +16,7 @@ services:
       - 3820:3820
 
   redis: # To be used in plex-api by bull queue
-    image: redis
+    image: redis:6.2-alpine
     ports:
       - '6420:6379'
     environment:

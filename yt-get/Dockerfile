@@ -13,7 +13,7 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
-RUN npm ci --production
+RUN npm ci --omit=dev
 
 # Bundle app source
 COPY --chown=node:node . .
