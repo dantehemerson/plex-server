@@ -52,7 +52,7 @@ export class DownloaderConsumer {
         addHeader: ['referer:youtube.com', 'user-agent:googlebot'],
         output: path.join(
           process.env.MEDIA_FOLDER,
-          'tmp_downloads',
+          '.tmp_downloads',
           `${job.data.videoTitle}.%(ext)s`,
         ),
       });
