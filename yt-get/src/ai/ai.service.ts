@@ -7,6 +7,7 @@ import { ChatGPTService } from './providers/chatgpt/chatgpt.service';
 import { MovieTitleDto } from './dto/movie-title.dto';
 import { EpisodeBestFullPath } from 'src/organizer/dto/episode-best-full-path.dto';
 import * as path from 'path';
+import { chunkArray } from '../common/helpers/chunk-array.helper';
 
 @Injectable()
 export class AiService {
@@ -68,7 +69,24 @@ export class AiService {
   /**
    * Returns the folder path were an episode should be stored to keep organized the plex library.
    */
-  async getEpisodeDestinationPath(
+  async getEpisodeDestinationPaths(
+    episodeTitles: string[],
+    tvShowTitle: string,
+  ): Promise<EpisodeBestFullPath[]> {
+    const chunked = chunkArray(episodeTitles, 5);
+
+    this.logger.log('Chunked files', chunked);
+
+    const responses = await Promise.all(
+      chunked.map((titles) =>
+        this.generateEpisodeDestinationPath(titles, tvShowTitle),
+      ),
+    );
+
+    return responses.flat();
+  }
+
+  private async generateEpisodeDestinationPath(
     episodeTitles: string[],
     tvShowTitle: string,
   ): Promise<EpisodeBestFullPath[]> {

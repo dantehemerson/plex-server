@@ -32,7 +32,7 @@ export class OrganizerService {
       .map((filePath) => path.basename(filePath))
       .filter(this.filesService.isVideoFile);
 
-    const destinationPaths = await this.aiService.getEpisodeDestinationPath(
+    const destinationPaths = await this.aiService.getEpisodeDestinationPaths(
       episodeTitles,
       params.tvShowTitle,
     );
