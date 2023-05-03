@@ -28,9 +28,7 @@ export class OrganizerService {
       baseFolder,
     });
 
-    const episodeTitles = filePaths
-      .map((filePath) => path.basename(filePath))
-      .filter(this.filesService.isVideoFile);
+    const episodeTitles = filePaths.filter(this.filesService.isVideoFile);
 
     const destinationPaths = await this.aiService.getEpisodeDestinationPaths(
       episodeTitles,
@@ -39,7 +37,7 @@ export class OrganizerService {
 
     const filesToMove = destinationPaths
       .map((episode) => ({
-        originalPath: path.join(baseFolder, episode.originalTitle),
+        originalPath: episode.originalTitle,
         destinaePath: episode.path
           ? path.join(mediaFolder, 'tvshows', episode.path)
           : undefined,
