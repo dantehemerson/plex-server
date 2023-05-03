@@ -9,7 +9,7 @@ export class ChatGPTService {
     return this.openAIApi.createChatCompletion({
       model: 'gpt-3.5-turbo',
       ...createCompletionRequest,
-      temperature: 0.38,
+      temperature: 0.39,
       max_tokens: 256,
       top_p: 1,
       frequency_penalty: 0.0,

@@ -1,4 +1,4 @@
-# Plex Server
+# 🍿 Plex Server
 
 My plex sever containerized.
 

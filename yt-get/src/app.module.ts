@@ -10,6 +10,8 @@ import { HealthModule } from './health/health.module';
 import { PopulatorModule } from './populator/populator.module';
 import { YoutubeModule } from './youtube/youtube.module';
 import { ConfigModule } from '@nestjs/config';
+import { OrganizerModule } from './organizer/organizer.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { ConfigModule } from '@nestjs/config';
     DownloaderModule,
     PopulatorModule,
     HealthModule,
+    OrganizerModule,
+    FilesModule,
   ],
   controllers: [AuthController, HealthController],
 })
